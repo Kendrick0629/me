@@ -7,6 +7,8 @@ import random
 
 
 def advancedGuessingGame():
+    print("\nWelcome to the guessing game!")
+    print("A number between 10 and 20")
     """Play a guessing game with a user.
 
     The exercise here is to rewrite the exampleGuessingGame() function
