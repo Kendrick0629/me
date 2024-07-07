@@ -8,7 +8,45 @@ import random
 
 def advancedGuessingGame():
     print("\nWelcome to the guessing game!")
-    print("A number between 10 and 20")
+    print("A number between your chosen lower bound and upper bound.")
+
+    while True:
+        try:
+            lowerBound = int(input("Enter the lower bound: "))
+            break
+        except ValueError:
+            print("Please enter a valid integer.")
+
+    while True:
+        try:
+            upperBound = int(input("Enter the upper bound: "))
+            if upperBound <= lowerBound:
+                print("Upper bound must be greater than lower bound.")
+            else:
+                break
+        except ValueError:
+            print("Please enter a valid integer.")
+
+    actualNumber = random.randint(lowerBound, upperBound)
+    guessed = False
+
+    while not guessed:
+        try:
+            guessedNumber = int(input(f"Guess a number between {lowerBound} and {upperBound}: "))
+            if guessedNumber < lowerBound or guessedNumber > upperBound:
+                print(f"Please guess a number within the bounds {lowerBound} to {upperBound}.")
+            elif guessedNumber == actualNumber:
+                print(f"You got it! It was {actualNumber}.")
+                guessed = True
+            elif guessedNumber < actualNumber:
+                print("Too small, try again :(")
+            else:
+                print("Too big, try again :(")
+        except ValueError:
+            print("Please enter a valid integer.")
+
+    return "You got it!"
+    
     """Play a guessing game with a user.
 
     The exercise here is to rewrite the exampleGuessingGame() function
@@ -30,25 +68,7 @@ def advancedGuessingGame():
     Remember to think modular. Try to keep your functions small and single
     purpose if you can!
     """
-    upperBound = 20
-    actualNumber = random.randint(10, upperBound)
-
-    guessed = False
-
-    while not guessed:
-        guessedNumber = int(input("Guess a number: "))
-        print(f"You guessed {guessedNumber},")
-        if guessedNumber == actualNumber:
-            print(f"You got it!! It was {actualNumber}")
-            guessed = True
-        
-        elif guessedNumber < actualNumber:
-            print("Too small, try again :'(")
-        else:
-            print("Too big, try again :'(")
-      except ValueError:
-          print("Invalid input. Please enter a valid number.")
-
+    
     
     # the tests are looking for the exact string "You got it!". Don't modify that!
 
