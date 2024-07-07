@@ -52,15 +52,6 @@ def fix_it(moves=True, should_move=True):
     else:
         return "No Problem"
     
-    if oves and not should_move:
-        return "WD-40"
-    
-    elif not moves and should_move:
-        return "Duct Tape"
-    
-    else:
-        return "No Problem"
-
 
 def loops_preview():
     """Make 8 poops.
@@ -99,10 +90,11 @@ def loops_1c(number_of_items=5, symbol="#"):
     Remember that you're being passed arguments here. Don't hard code the number
     or the symbol, let it be whatever it wants to be.
     """
-    choc_list = []
+
+    resource_list = []
     for i in range (number_of_items):
-        choc_list.append(symbol)
-        return choc_list
+        resource_list.append(symbol)
+    return resource_list
 
 
 def loops_2_preview():
@@ -243,7 +235,7 @@ def loops_5():
     for i in range(10):
         row = []
         for j in range(10):
-            row.append(f"i{i},j{j}")
+            row.append(f"(i{i},j{j})")
         field.append(row)
     return field
 
