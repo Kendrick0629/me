@@ -93,7 +93,7 @@ def wordy_pyramid():
     for i in range(3, 20, 2):
         url = f"https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength={i}"
         response = requests.get(url)
-        if response.status_code is 200:
+        if response.status_code == 200:
             word = response.text
             pyramid.append(word)
 
@@ -119,10 +119,31 @@ def pokedex(low=1, high=5):
     id = 5
     url = f"https://pokeapi.co/api/v2/pokemon/{id}"
     r = requests.get(url)
+
+    tallest_pokemon = {
+        "name" : None,
+        "weight" : 0,
+        "height" : 0
+    }
+    
+
     if r.status_code is 200:
         the_json = json.loads(r.text)
+        for id in range (low, high +1 ):
+            if r.status_code == 200: 
+                the_json = r.json()
+                name = the_json['name']
+                weight = the_json['weight']
+                height = the_json['height']
 
-    return {"name": None, "weight": None, "height": None}
+    if height > tallest_pokemon["height"]:
+        tallest_pokemon["name"] = name
+        tallest_pokemon["weight"] = weight
+        tallest_pokemon["height"] = height
+
+
+
+    return tallest_pokemon
 
 
 def diarist():
@@ -142,6 +163,8 @@ def diarist():
 
     NOTE: this function doesn't return anything. It has the _side effect_ of modifying the file system
     """
+    
+    
     pass
 
 

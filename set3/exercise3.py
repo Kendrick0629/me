@@ -7,6 +7,7 @@ import random
 
 
 def advancedGuessingGame():
+
     print("\nWelcome to the guessing game!")
     print("A number between your chosen lower bound and upper bound.")
 
