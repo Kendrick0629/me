@@ -164,7 +164,7 @@ def pet_filter(letter="a") -> list:
         "fancy rat and lab rat", "mink", "red fox", "hedgehog", "guppy"
     ]
     # fmt: on
-    filtered = []
+    filtered = [pet for pet in pets if letter in pet]
 
     return filtered
 
@@ -181,6 +181,12 @@ def best_letter_for_pets() -> str:
 
     the_alphabet = string.ascii_lowercase
     most_popular_letter = ""
+    max_pets = 0
+    for letter in the_alphabet:
+        count = len(pet_filter(letter))
+        if count > max_pets:
+            max_pets = count
+            most_popular_letter = letter
 
     return most_popular_letter
 
@@ -213,7 +219,20 @@ def make_filler_text_dictionary() -> dict:
     url = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength="
     wd = {}
 
+    for length in range(3, 8):
+        words = []
+        for _ in range(4):
+            response = requests.get(url + str(length))
+            if response.status_code == 200:
+                words.append(response.text.strip())
+            else:
+                words.append("error")
+        wd[length] = words
+    
+
     return wd
+
+
 
 
 def random_filler_text(number_of_words=200) -> str:
@@ -230,6 +249,10 @@ def random_filler_text(number_of_words=200) -> str:
     my_dict = make_filler_text_dictionary()
 
     words = []
+    for _ in range(number_of_words):
+        word_length = random.randint(3, 7) 
+        word = random.choice(my_dict[word_length])  
+        words.append(word)
 
     return " ".join(words)
 
@@ -250,9 +273,29 @@ def fast_filler(number_of_words=200) -> str:
     If you get this one to work, you are a Very Good Programmer™!
     """
 
+
     fname = "dict_cache.json"
 
-    return None
+    if os.path.isfile(fname):
+        with open(fname, "r") as inFile:
+            my_dick = json.load(inFile)
+    else:
+        my_dick = make_filler_text_dictionary()
+        with open(fname, "w") as outFile:
+            json.dump(my_dick, outFile)
+    words = []
+
+    for _ in range(number_of_words):
+        word_length = random.randint(3, 6)
+        word_index = random.randint(0, 2)
+        try:
+            words.append(my_dick[word_length][word_index])
+        except KeyError:
+            words.append(my_dick[str(word_length)][word_index])
+
+    paragraph = " ".join(words)
+    paragraph = paragraph[0].upper() + paragraph[1:]
+    return paragraph + "."
 
 
 if __name__ == "__main__":
