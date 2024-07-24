@@ -48,22 +48,22 @@ def dictionary_please() -> dict:
 
 def is_it_5(some_number) -> bool:
     """Returns True if the argument passed is 5, otherwise returns False."""
-    well_is_it = 5
+    well_is_it = (some_number == 5)
     return well_is_it
 
 
 def take_five(some_number) -> int:
     """Subtracts 5 from some_number."""
-    return 6-5
+    return some_number - 5
 
 
 def greet(name="Towering Timmy") -> str:
     """Return a greeting.
     return a string of "Well hello, " and the name argument.
     E.g. if given as "Towering Timmy" it should
-         return "Well hello, Towering Timmy"
+    return "Well hello, Towering Timmy"
     """
-    return "Well hello," + name
+    return "Well hello, " + name
 
 
 def one_counter(input_list=[1, 4, 1, 5, 1, 1]) -> int:
@@ -71,7 +71,7 @@ def one_counter(input_list=[1, 4, 1, 5, 1, 1]) -> int:
     Return an integer.
     TIP: the test will use a different input_list, so don't just return 2
     """
-    count = 1
+    count = input_list.count(1)
 
     return count
 
@@ -80,7 +80,7 @@ def n_counter(search_for_this, input_list=[1, 4, 1, 5, 1, 1]) -> int:
     """Count the number of times search_for_this shows up in the input_list.
     Return an integer.
     """
-    count = 
+    count = input_list.count(search_for_this)
 
     return count
 
@@ -90,7 +90,7 @@ def fizz_buzz() -> list:
 
     This is the most famous basic programming test of all time!
 
-       "Write a program that prints the numbers from 1 to 100. But for
+    "Write a program that prints the numbers from 1 to 100. But for
         multiples of three print "Fizz" instead of the number and for
         the multiples of five print "Buzz". For numbers which are
         multiples of both three and five print "FizzBuzz"."
@@ -100,11 +100,19 @@ def fizz_buzz() -> list:
     Return a list that has an integer if the number isn't special,
     and a string if it is. E.g.
         [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8,
-         'Fizz', 'Buzz',  11, 'Fizz', 13, 14,
-         'FizzBuzz', 16, 17, ...]
+        'Fizz', 'Buzz',  11, 'Fizz', 13, 14,
+        'FizzBuzz', 16, 17, ...]
     """
     fizz_buzz_list = []
-    # your code here
+    for i in range(1, 101):
+        if i % 3 == 0 and i % 5 == 0:
+            fizz_buzz_list.append('FizzBuzz')
+        elif i % 3 == 0:
+            fizz_buzz_list.append('Fizz')
+        elif i % 5 == 0:
+            fizz_buzz_list.append('Buzz')
+        else:
+            fizz_buzz_list.append(i)
 
     return fizz_buzz_list
 
@@ -116,12 +124,16 @@ def set_it_on_fire(input_string="very naughty boy") -> str:
     e.g. "very naughty boy" should return the string
     "🔥V🔥E🔥R🔥Y🔥 🔥N🔥A🔥U🔥G🔥H🔥T🔥Y🔥 🔥B🔥O🔥Y🔥"
     TIP: strings are pretty much lists of chars.
-         If you list("string") you get ['s', 't', 'r', 'i', 'n', 'g']
+    If you list("string") you get ['s', 't', 'r', 'i', 'n', 'g']
     TIP: consider using the 'join' method in Python.
     TIP: make sure that you have a 🔥 on both ends of the string.
     """
 
-    return None
+    input_string = input_string.upper()
+    
+    interleaved_string = "🔥" + "🔥".join(input_string) + "🔥"
+    
+    return interleaved_string
 
 
 def the_chain_gang_5(the_value) -> bool:
@@ -134,8 +146,8 @@ def the_chain_gang_5(the_value) -> bool:
     TIP: you've already written a function that returns True if the value is 5
     TIP: you've already written a function that subtracts 5
     """
-
-    return None
+    result_after_subtract = take_five(the_value)
+    return is_it_5(result_after_subtract)
 
 
 def pet_filter(letter="a") -> list:
