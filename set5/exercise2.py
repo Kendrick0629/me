@@ -146,13 +146,21 @@ def draw_koch(drawing_method, steps_deep=4):
 def square_koch(t, order, size):
     r"""Draw a koch curve with a square rather than a triangular point.
 
-           _
+    
     e.g. _| |_ rather than _/\_
 
     Leave the turtle facing the same direction.
 
     """
     trace = ""
+
+    if order == 0:
+        t.forward(size)
+    else:
+        for angle in [0, 90, -90, 0]:  # Adjust angles to form square pattern
+            square_koch(t, order - 1, size / 3)  # Recursively reduce size
+            t.left(angle)
+            
     # write the rest of the function here.
     return str(order) + trace
     pass
